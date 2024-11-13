@@ -1,0 +1,36 @@
+x = input('Enter the first sequence x[n]: ');
+x_start = input('Enter the starting position of x[n]: ');
+h = input('Enter the second sequence h[n]: ');
+h_start = input('Enter the starting position of h[n]: ');
+
+len_x = length(x);
+len_h = length(h);
+
+y_start = x_start + h_start;
+
+len_y = len_x + len_h - 1;
+
+x_padded = [x, zeros(1, len_y - len_x)];
+h_padded = [h, zeros(1, len_y - len_h)];
+
+y = zeros(1, len_y);
+
+for n = 1:len_y
+    for k = 1:len_x
+        if (n - k + 1 > 0) && (n - k + 1 <= len_h)
+            y(n) = y(n) + x_padded(k) * h_padded(n - k + 1);
+        end
+    end
+end
+
+disp('The result of the linear convolution is:');
+disp(y);
+
+disp(['The starting position of the output sequence y[n] is: ', num2str(y_start)]);
+
+n_y = y_start:y_start + len_y - 1;
+stem(n_y, y, 'filled');
+title('Linear Convolution');
+xlabel('n');
+ylabel('y[n]');
+grid on;

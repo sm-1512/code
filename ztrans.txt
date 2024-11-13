@@ -1,0 +1,27 @@
+a = [1 2.5 1 -1.25];
+b = [1 0 0.25];
+[r, p, k] = residue(b,a);
+zplane(b,a);
+display(r);
+display(p);
+display(k);
+
+
+if all(abs(p)<1)
+    disp('stable');
+else 
+    disp('unstable');
+end
+% Initialize the inverse Z-transform expression
+inverseZ = 0;
+
+% Sum the individual terms in the inverse Z-transform
+for i = 1:length(r)
+    % Each term is in the form: r(i) * p(i)^n * u[n]
+    inverseZ = inverseZ + r(i) * (p(i)^n);
+end
+
+% Display the result with u[n] notation
+fprintf('y=');
+disp(['(', char(inverseZ), ') * u[n]'])
+

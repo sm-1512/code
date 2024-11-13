@@ -1,0 +1,75 @@
+x1 = input('Enter Sequence 1: '); 
+x2 = input('Enter Sequence 2: ');  
+
+n = max(length(x1), length(x2));
+
+x1 = [x1, zeros(1, n - length(x1))];
+x2 = [x2, zeros(1, n - length(x2))];
+
+disp('Padded Sequence 1:');
+disp(x1);
+disp('Padded Sequence 2:');
+disp(x2);
+
+X_dft1 = dft(x1);
+X_dft2 = dft(x2);
+
+R = X_dft1 .* X_dft2;
+
+r = idft(R);
+
+disp('Circular Convolution Result (Real part):');
+disp(real(r));  
+
+figure;
+
+subplot(3, 2, 1);
+stem(0:n-1, x1, 'filled');
+title('Sequence 1 (x1)');
+xlabel('n');
+ylabel('Amplitude');
+
+subplot(3, 2, 2);
+stem(0:n-1, x2, 'filled');
+title('Sequence 2 (x2)');
+xlabel('n');
+ylabel('Amplitude');
+
+subplot(3, 2, 3);
+stem(0:n-1, abs(X_dft1), 'filled');
+title('Magnitude of DFT (X1)');
+xlabel('k');
+ylabel('|X1(k)|');
+
+subplot(3, 2, 4);
+stem(0:n-1, abs(X_dft2), 'filled');
+title('Magnitude of DFT (X2)');
+xlabel('k');
+ylabel('|X2(k)|');
+
+subplot(3, 2, 5);
+stem(0:n-1, real(r), 'filled');
+title('Circular Convolution Result');
+xlabel('n');
+ylabel('Amplitude');
+
+function X = dft(x)
+    N = length(x);  
+    X = zeros(1, N);  
+    for k = 1:N
+        for n = 1:N
+            X(k) = X(k) + x(n) * exp(-1j * 2 * pi * (k-1) * (n-1) / N);
+        end
+    end
+end
+
+function Y = idft(x)
+    N = length(x);  
+    Y = zeros(1, N); 
+    for n = 1:N
+        for k = 1:N
+            Y(n) = Y(n) + x(k) * exp(1j * 2 * pi * (k-1) * (n-1) / N);
+        end
+    end
+    Y = Y / N;  
+end

@@ -1,0 +1,48 @@
+% Parameters
+t = -100:0.1:100;  % Higher resolution for continuous signal
+fm = 0.02;         % Frequency of the original continuous signal
+x = cos(2*pi*fm*t);
+
+% Plot 1: Continuous Time Signal
+subplot(2,2,1);
+plot(t, x, 'b');
+xlabel('t');
+ylabel('Amplitude');
+title('Continuous Time Signal');
+
+% Discrete time range for all cases
+n = -20:20;
+
+% Sampling frequencies
+fs1 = 0.03;  % Less than 2 * fm (Undersampling)
+fs2 = 0.04;  % Equal to 2 * fm (Critical sampling)
+fs3 = 0.4;   % Greater than 2 * fm (Oversampling)
+
+% Sampling periods
+Ts1 = 1 / fs1;
+Ts2 = 1 / fs2;
+Ts3 = 1 / fs3;
+
+% Plot 2: Discrete Time Signal with fs < 2*fm (Undersampling)
+x1 = cos(2 * pi * fm * n * Ts1);
+subplot(2,2,2);
+plot(n, x1, 'r');
+xlabel('n');
+ylabel('Amplitude');
+title('Discrete Time Signal with fs < 2*fm (Undersampling)');
+
+% Plot 3: Discrete Time Signal with fs = 2*fm (Critical Sampling)
+x2 = cos(2 * pi * fm * n * Ts2);
+subplot(2,2,3);
+plot(n, x2, 'g');
+xlabel('n');
+ylabel('Amplitude');
+title('Discrete Time Signal with fs = 2*fm (Critical Sampling)');
+
+% Plot 4: Discrete Time Signal with fs > 2*fm (Oversampling)
+x3 = cos(2 * pi * fm * n * Ts3);
+subplot(2,2,4);
+plot(n, x3, 'k');
+xlabel('n');
+ylabel('Amplitude');
+title('Discrete Time Signal with fs > 2*fm (Oversampling)');
