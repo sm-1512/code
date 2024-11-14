@@ -1,0 +1,90 @@
+%high pass
+fs = 8000;
+fc = 1200;
+wc = 2*pi*1200;
+wn = 2*fc/fs;
+t = 0:1/fs:1;
+n = 60;
+x1 = sin(2*pi*1000*t);
+x2 = sin(2*pi*2000*t);
+x3 = sin(2*pi*3000*t);
+x = x1 + x2 + x3;
+b = fir1(n,wn, "high");
+y = filter(b,1,x);
+
+x_dft = abs(fft(x));
+y_dft = abs(fft(y));
+
+
+plot(y_dft);
+title('y_dft (cofficients from fir1() func)');
+xlabel('freq (Hz)');
+ylabel('magnitude');
+figure;
+
+plot(x_dft);
+title('x_dft');
+xlabel('freq (Hz)');
+ylabel('magnitude');
+figure;
+
+
+
+
+%low pass
+fs = 8000;
+fc = 1200;
+wc = 2*pi*1200;
+wn = 2*fc/fs;
+t = 0:1/fs:1;
+n = 15;
+x1 = sin(2*pi*1000*t);
+x2 = sin(2*pi*2000*t);
+x3 = sin(2*pi*3000*t);
+x = x1 + x2 + x3;
+b = fir1(n,wn, "low");
+y = filter(b,1,x);
+
+x_dft = abs(fft(x));
+y_dft = abs(fft(y));
+
+
+plot(y_dft);
+title('y_dft (cofficients from fir1() func)');
+xlabel('freq (Hz)');
+ylabel('magnitude');
+figure;
+
+plot(x_dft);
+title('x_dft');
+xlabel('freq (Hz)');
+ylabel('magnitude');
+figure;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
