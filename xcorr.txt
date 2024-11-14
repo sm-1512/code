@@ -18,3 +18,4 @@ figure;
 stem(R_func);
 figure;
 stem(R_conv);
+Cross-correlation is a measure of similarity between two signals as a function of the time-lag applied to one of them. In signal processing and statistics, cross-correlation is used to detect the time delay between two signals, identify periodicities, and determine the degree of similarity between signals in different domains.
