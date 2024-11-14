@@ -32,3 +32,24 @@ plot(combined_filter, 'k');
 title('Cascaded FIR Filters');
 xlabel('Samples');
 ylabel('Amplitude');
+
+Finite Impulse Response (FIR) filters are a fundamental class of filters in digital signal processing (DSP). FIR filters have finite duration responses, meaning their output becomes zero in a finite amount of time after an impulse input. FIR filters are often implemented using efficient algorithms, including the Fast Fourier Transform (FFT) or the Frequency Sampling Method. The Impulse Invariant Transformation (IIT) is another technique used in the design of FIR filters that transforms an analog filter into a digital one.
+
+1. Finite Impulse Response (FIR) Filters
+FIR filters have several unique characteristics that make them especially useful in DSP applications:
+
+Characteristics of FIR Filters
+Finite Duration: FIR filters respond to an impulse input for a limited number of samples (equal to the number of filter coefficients).
+Linearity: FIR filters are linear and obey the principles of superposition and homogeneity.
+Non-recursive: FIR filters do not rely on feedback from previous outputs, making them stable and simpler to implement.
+Linear Phase: FIR filters can be designed to have linear phase, meaning all frequency components of the input signal experience the same phase delay, preserving the shape of the signal.
+
+Infinite Impulse Response (IIR) Filters are a class of digital filters that have an impulse response that theoretically extends to infinity. This is because IIR filters use feedback, meaning the current output depends not only on the current and past input values but also on past output values. This feedback mechanism allows IIR filters to achieve a desired frequency response with fewer filter coefficients compared to Finite Impulse Response (FIR) filters, making them computationally efficient.
+
+1. Characteristics of IIR Filters
+IIR filters are commonly used in digital signal processing and are known for several key characteristics:
+
+Feedback: IIR filters incorporate feedback from previous outputs, which allows them to have an "infinite" duration impulse response.
+Recursive Structure: IIR filters are typically designed using recursive equations, where each output sample is calculated based on past input and output samples.
+Efficiency: Because of their recursive nature, IIR filters can often achieve a desired frequency response with fewer coefficients than an FIR filter. This makes them more efficient in terms of memory and processing requirements.
+Potential Instability: Due to feedback, IIR filters can become unstable if not designed properly. Stability is a primary consideration, as it depends on the placement of poles in the z-domain.
