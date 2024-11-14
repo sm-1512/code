@@ -1,0 +1,74 @@
+
+% Parameters for the original signal
+fs = 1000;             
+t = 0:1/fs:1;          
+x = sin(2*pi*50*t);    
+
+% Plot the original signal
+figure;
+subplot(3,2,1);
+plot(t, x);
+title('Original Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+% Decimation
+
+M = 4;                 
+y_decimated = decimate(x, M);  
+
+% Plot the decimated signal
+t_decimated = t(1:M:end);      
+subplot(3,2,2);
+plot(t_decimated, y_decimated);
+title(['Decimated Signal (Factor = ', num2str(M), ')']);
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+% Interpolation
+
+L = 4;                 
+y_interpolated = interp(x, L); 
+
+t_interpolated = linspace(0, 1, length(y_interpolated)); % New time vector for interpolated signal
+subplot(3,2,3);
+plot(t_interpolated, y_interpolated);
+title(['Interpolated Signal (Factor = ', num2str(L), ')']);
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+% Sampling
+
+fs_continuous = 5000;              
+t_continuous = 0:1/fs_continuous:1;
+x_continuous = sin(2*pi*50*t_continuous); 
+
+fs_sampled = 200;                  
+T_sampled = 1/fs_sampled;
+t_sampled = 0:T_sampled:1;         
+x_sampled = sin(2*pi*50*t_sampled); 
+
+% Plot the continuous-like and sampled signals
+subplot(3,2,4);
+plot(t_continuous, x_continuous);
+title('Continuous-like Signal');
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+subplot(3,2,5);
+stem(t_sampled, x_sampled, 'filled');  % Use stem to show discrete samples
+title(['Sampled Signal at ', num2str(fs_sampled), ' Hz']);
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+subplot(3,2,6);
+hold on;
+plot(t, x, 'b', 'DisplayName', 'Original Signal');
+plot(t_decimated, y_decimated, 'r', 'DisplayName', 'Decimated Signal');
+plot(t_interpolated, y_interpolated, 'g', 'DisplayName', 'Interpolated Signal');
+stem(t_sampled, x_sampled, 'k', 'filled', 'DisplayName', 'Sampled Signal');
+title('Summary of All Signals');
+xlabel('Time (s)');
+ylabel('Amplitude');
+legend;
+hold off;
