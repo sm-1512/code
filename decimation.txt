@@ -61,14 +61,30 @@ title(['Sampled Signal at ', num2str(fs_sampled), ' Hz']);
 xlabel('Time (s)');
 ylabel('Amplitude');
 
-subplot(3,2,6);
-hold on;
-plot(t, x, 'b', 'DisplayName', 'Original Signal');
-plot(t_decimated, y_decimated, 'r', 'DisplayName', 'Decimated Signal');
-plot(t_interpolated, y_interpolated, 'g', 'DisplayName', 'Interpolated Signal');
-stem(t_sampled, x_sampled, 'k', 'filled', 'DisplayName', 'Sampled Signal');
-title('Summary of All Signals');
-xlabel('Time (s)');
-ylabel('Amplitude');
-legend;
-hold off;
+Decimation
+Purpose: Decimation reduces the sampling rate of a signal by a factor, often denoted as 
+𝑀
+M. This process is also known as downsampling.
+Process: Decimation consists of two main steps:
+Low-pass filtering: First, a low-pass filter is applied to the signal to prevent aliasing. This filter removes high-frequency content that could cause overlapping in the frequency spectrum when downsampled.
+Downsampling: After filtering, every 
+𝑀
+M-th sample is kept, and the rest are discarded.
+Effect: Decimation reduces the data rate and bandwidth of the signal, effectively compressing it.
+Applications: Decimation is widely used in applications like audio processing, telecommunications, and reducing data storage in systems that don’t require high sample rates.
+2. Interpolation
+Purpose: Interpolation increases the sampling rate of a signal by an integer factor, denoted as 
+𝐿
+L, also called upsampling.
+Process: Interpolation consists of two main steps:
+Upsampling: The signal is upsampled by inserting 
+𝐿
+−
+1
+L−1 zeros between each sample, increasing the sampling rate.
+Low-pass filtering: A low-pass filter is applied to smooth the upsampled signal and reconstruct the intermediate values, eliminating any high-frequency artifacts caused by zero-insertion.
+Effect: Interpolation increases the data rate, effectively recreating a higher sample rate signal.
+Applications: Interpolation is essential in digital audio and video processing, telecommunications, and scenarios where a higher sample rate is needed after a signal is digitized at a lower rate.
+Summary
+Decimation reduces the sampling rate by filtering and downsampling, while interpolation increases it by upsampling and filtering.
+Both are critical in multirate signal processing systems, where signals must be adjusted to optimal sample rates for efficient transmission, processing, or storage.
